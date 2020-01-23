@@ -6,24 +6,34 @@
 /*   By: bbekmama <bbekmama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/01 19:56:05 by bbekmama          #+#    #+#             */
-/*   Updated: 2020/01/20 13:56:10 by bbekmama         ###   ########.fr       */
+/*   Updated: 2020/01/22 17:13:29 by bbekmama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int		set_fractol(int ac, char **av, t_fractol *head)
+void		set_fractol(int ac, char **av, t_fractol *head)
 {
+	if (ac == 1)
+	{
+		write(1, "Please add the parameter, type: ./fractol 1-5\n", 47);
+		exit (1);
+	}
 	if (ac == 3 && ac--)
 		if (fork())
 			av[1] = av[2];
 	if ((ft_strcmp(av[1], "1" ) == 0 || ft_strcmp(av[1], "2" ) == 0 ||
-	ft_strcmp(av[1], "3" ) == 0 || ft_strcmp(av[1], "4" ) == 0 || ft_strcmp(av[1], "5") == 0||
-	ft_strcmp(av[1], "6") == 0 || ft_strcmp(av[1], "7") == 0) && ac == 2)
+		ft_strcmp(av[1], "3" ) == 0 || ft_strcmp(av[1], "4" ) == 0 || ft_strcmp(av[1], "5") == 0||
+		ft_strcmp(av[1], "6") == 0 || ft_strcmp(av[1], "7") == 0) && ac == 2)
 		head->fractol_number = ft_atoi(av[1]);
+	// else if (ft_strcmp(av[1], " " ) == 0)
+	// 	write(1, "Please add the parameter, type: ./fractol 1-5\n", 47);
 	else
+	{
 		write(1, "Please add the parameter, type: ./fractol 1-5\n", 47);
-	return (0);
+		exit(1);
+	}
+	//return (0);
 }
 
 void	default_settings(t_fractol *head)
@@ -55,7 +65,6 @@ int		main(int ac, char **av)
 	set_fractol(ac, av, head);
 	initialize(head);
 	hyperthreading(head);
-	draw(head);
 	mlx_hook(head->win_ptr, 2, 0, keys, head);
 	mlx_hook(head->win_ptr, 4, 0, mouse, head);
 	if (ft_strcmp(av[1], "5") == 0)

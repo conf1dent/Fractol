@@ -6,7 +6,7 @@
 /*   By: bbekmama <bbekmama@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/06 15:19:39 by bbekmama          #+#    #+#             */
-/*   Updated: 2020/01/20 15:09:37 by bbekmama         ###   ########.fr       */
+/*   Updated: 2020/01/23 11:46:32 by bbekmama         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,20 +64,21 @@ void	hyperthreading(t_fractol *head)
 	t_fractol	new_head[THREADS];
 	pthread_t	thread_id[THREADS]; //int that identifies # of threads in the sys
 	int			i;
-	
+
 	i = 0;
 	while (i < THREADS)
 	{
 		new_head[i] = *head;
 		new_head[i].start = i * (HEIGHT / THREADS);
 		new_head[i].finish = (i + 1) * (HEIGHT / THREADS);
-		pthread_create(&thread_id[i], NULL, (void *)draw, (void*)&thread_id[i]);
+		pthread_create(&thread_id[i], NULL, (void *)draw, (void *)&new_head[i]);
 		i++;
 	}
 	while (i-- > 0)
 		pthread_join(thread_id[i], NULL);
 	mlx_put_image_to_window(head->mlx_ptr, head->win_ptr, head->image, 0, 0);
 }
+
 
 
 //The first argument is a pointer to thread_id which is set by this function.

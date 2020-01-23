@@ -6,7 +6,7 @@
 #    By: bbekmama <bbekmama@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/16 23:52:13 by bbekmama          #+#    #+#              #
-#    Updated: 2020/01/17 13:01:38 by bbekmama         ###   ########.fr        #
+#    Updated: 2020/01/23 11:06:32 by bbekmama         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,9 +25,9 @@ all:
 	echo "Compilation is successful"
 clean:
 	-rm -f $(OBJ)
-	@make -C libft/ clean
-	@make -C minilibx_macos/clean
+	make -C libft/ clean
+	make -C minilibx_macos/clean
 fclean: clean
 	/bin/rm -f $(NAM)
-	@make -C libft/fclean
+	make -C libft/fclean
 re: fclean all
